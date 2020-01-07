@@ -3,6 +3,9 @@
 var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 var pictureContainer = document.querySelector('.pictures');
 
+var efectList = document.querySelector('.effects__list');
+var efects = efectList.querySelectorAll('.effects__preview');
+
 var LIKES = {
   MIN: 15,
   MAX: 200,
@@ -43,6 +46,10 @@ function getRandomElement(arr) {
   return arr[randomindex];
 }
 
+function uploadImageClose() {
+  uploadChangeImageContainer.classList.add('hidden');
+}
+
 function getPhotos() {
   photos = [];
   for (var i = 0; i < 25; i++) {
@@ -68,3 +75,26 @@ for (var i = 0; i <= photos.length - 1; i++) {
   fragment.appendChild(renderPicture(photos[i]));
 }
 pictureContainer.appendChild(fragment);
+
+var uploadImageContainer = document.querySelector('.img-upload__preview');
+var uploadImage = uploadImageContainer.querySelector('img');
+//  var uploadImageEffectLevelSlider = document.querySelector('.img-upload__effect-level');
+var uploadImageScale = document.querySelector('.img-upload__scale');
+var uploadChangeImageContainer = document.querySelector('.img-upload__overlay');
+var uploadFileInput = document.querySelector('#upload-file');
+uploadFileInput.addEventListener('change', function () {
+  uploadChangeImageContainer.classList.remove('hidden');
+  // uploadImageEffectLevelSlider.classList.add('hidden');
+  uploadImageScale.classList.add('hidden');
+});
+
+efects.forEach(function (elem) {
+  elem.addEventListener('click', function () {
+    elem.cheked = true;
+    uploadImage.className = elem.className;
+    uploadImage.classList.remove('effects__preview');
+  });
+});
+
+var closeButton = document.querySelector('.img-upload__cancel');
+closeButton.addEventListener('click', uploadImageClose);
