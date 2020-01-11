@@ -11,6 +11,11 @@ var LIKES = {
   MAX: 200,
 };
 
+var COMENTSLENGTH = {
+  MIN: 0,
+  MAX: 140,
+};
+
 var COMMENTS = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -46,9 +51,16 @@ function getRandomElement(arr) {
   return arr[randomindex];
 }
 
-function uploadImageClose() {
+function uploadImageCloseButton() {
   uploadChangeImageContainer.classList.add('hidden');
 }
+var uploadImageDescription =document.querySelector('.text__description'); 
+function uploadImageCloseEsc(evt) {
+  if(evt.target !== uploadImageDescription){
+  if (evt.keyCode === 27) {
+    uploadChangeImageContainer.classList.add('hidden');
+  }
+}}
 
 function getPhotos() {
   photos = [];
@@ -97,4 +109,6 @@ efects.forEach(function (elem) {
 });
 
 var closeButton = document.querySelector('.img-upload__cancel');
-closeButton.addEventListener('click', uploadImageClose);
+closeButton.addEventListener('click', uploadImageCloseButton);
+
+document.addEventListener('keydown', uploadImageCloseEsc);
